@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 
-class Publisher extends Model {
+class Book extends Model {
     static init(conn) {
         super.init({
             title: DataTypes.STRING,
@@ -19,7 +19,7 @@ class Publisher extends Model {
             foreignKey: 'author_id',
             as: 'author',
         });
-        this.belongsTo(models.Gender, {
+        this.belongsTo(models.Genrer, {
             foreignKey: 'gender_id',
             as: 'gender',
         });
@@ -30,4 +30,4 @@ class Publisher extends Model {
     }
 }
 
-module.exports = Publisher;
+module.exports = Book;

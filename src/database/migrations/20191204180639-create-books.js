@@ -9,6 +9,7 @@ module.exports = {
       autoIncrement: true,
       allowNull: false,
     },
+    
     genrer_id: {
       type: Sequelize.INTEGER,
       allowNull: false,
@@ -19,6 +20,7 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     },
+
     author_id: {
       type: Sequelize.INTEGER,
       allowNull: false,
@@ -29,6 +31,7 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     },
+
     publisher_id: {
       type: Sequelize.INTEGER,
       allowNull: false,
@@ -39,14 +42,26 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     },
+
     title: {
       type: Sequelize.STRING,
       allowNull: false,
     },
+
     release_date: {
       type: Sequelize.DATE,
       allowNull: false,
     },
+
+    created_at: {
+      type: Sequelize.DATE,
+      allowNull: false,
+    },
+
+    updated_at: {
+      type: Sequelize.DATE,
+      allowNull: false,
+    }
    })
   },
 
