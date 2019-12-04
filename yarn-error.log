@@ -1,0 +1,39 @@
+Arguments: 
+  /usr/bin/node /usr/local/bin/yarn add express pg pg-hstore sequelize
+
+PATH: 
+  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/bruno/Android/Sdk/tools:/home/bruno/Android/Sdk/platform-tools:/home/bruno/Android/Sdk/tools:/home/bruno/Android/Sdk/platform-tools
+
+Yarn version: 
+  1.19.1
+
+Node version: 
+  8.10.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: Hostname/IP doesn't match certificate's altnames: "Host: registry.yarnpkg.com. is not in the cert's altnames: DNS:wifi.udesc.br"
+      at Object.checkServerIdentity (tls.js:223:17)
+      at TLSSocket.<anonymous> (_tls_wrap.js:1111:29)
+      at emitNone (events.js:106:13)
+      at TLSSocket.emit (events.js:208:7)
+      at TLSSocket._finishInit (_tls_wrap.js:639:8)
+      at TLSWrap.ssl.onhandshakedone (_tls_wrap.js:469:38)
+
+npm manifest: 
+  {
+    "name": "Tech-Book-Server",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/Tech-Book/Tech-Book-Server.git",
+    "author": "brunorech <brunogrech@hotmail.com>",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
