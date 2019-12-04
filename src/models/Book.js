@@ -11,17 +11,21 @@ class Publisher extends Model {
     }
 
     static associate(models) {
+        this.hasMany(models.BookCopy, {
+            foreignKey: 'book_id',
+            as: 'copies',
+        });
         this.belongsTo(models.Author, {
             foreignKey: 'author_id',
-            as: 'Author',
+            as: 'author',
         });
         this.belongsTo(models.Gender, {
             foreignKey: 'gender_id',
-            as: 'Gender',
+            as: 'gender',
         });
         this.belongsTo(models.Publisher, {
             foreignKey: 'publisher_id',
-            as: 'Publisher',
+            as: 'publisher',
         });
     }
 }
