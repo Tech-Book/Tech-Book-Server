@@ -9,22 +9,36 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
+
       name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
+
       login: {
         type: Sequelize.STRING,
         allowNull: false,
       },
+
       password: {
         type: Sequelize.STRING,
         allowNull: false,
       },
+
       phone: {
         type: Sequelize.STRING,
         allowNull: false,
       },
+
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      }
     })
   },
 

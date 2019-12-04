@@ -9,6 +9,7 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
+
       copy_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -19,6 +20,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
+
       student_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -29,18 +31,31 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
+
       devolution_date: {
         type: Sequelize.DATE,
         allowNull: false,
       },
+
       limit_date: {
         type: Sequelize.DATE,
         allowNull: false,
       },
+
       delivered_date: {
         type: Sequelize.DATE,
         allowNull: false,
       },
+
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      }
     });
   },
 

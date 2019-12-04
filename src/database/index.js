@@ -27,6 +27,4 @@ Book.associate(models);
 BookCopy.associate(models);
 Lending.associate(models);
 
-
-
 module.exports = connection;
