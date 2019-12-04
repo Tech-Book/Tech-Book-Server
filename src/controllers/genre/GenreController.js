@@ -3,8 +3,8 @@ const Genre = require('../../models/Genre');
 module.exports = {
     async index(req, res) {
         try {
-            const genrer = await Genre.findAll();
-            res.json(genrer);
+            const genre = await Genre.findAll();
+            res.json(genre);
         } catch (error) {
             res.status(500).json({
                 message: 'Internal Server Error',
@@ -16,13 +16,13 @@ module.exports = {
     async show(req, res) {
         try {
             const { genre_id } = req.params;
-            const genrer = await Genre.findByPk(genre_id);
+            const genre = await Genre.findByPk(genre_id);
 
-            if (!genrer) {
+            if (!genre) {
                 return res.status(400).json({ message: 'Genre not found' });
             }
 
-            res.json(genrer);
+            res.json(genre);
         } catch (error) {
             res.status(500).json({
                 message: 'Internal Server Error',
@@ -34,8 +34,8 @@ module.exports = {
     async store(req, res) {
         try {
             const { name } = req.body;
-            const genrer = await Genre.create({ name });
-            return res.json(genrer);
+            const genre = await Genre.create({ name });
+            return res.json(genre);
         } catch (error) {
             res.status(500).json({
                 message: 'Internal Server Error',
@@ -48,12 +48,12 @@ module.exports = {
         try {
             const { genre_id } = req.params;
             const { name } = req.body;
-            const genrer = await Genre.findByPk(genre_id);
+            const genre = await Genre.findByPk(genre_id);
 
             if (!name) {
                 return res.status(400).json({ message: 'Invalid name' });
             }
-            if (!genrer) {
+            if (!genre) {
                 return res.status(400).json({ message: 'Genre not found' });
             }
 

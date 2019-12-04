@@ -2,56 +2,91 @@ const Author = require('../../models/Author');
 
 module.exports = {
     async index(req, res) {
-        const author = await Author.findAll();
-        res.json(author);
+        try {
+            const author = await Author.findAll();
+            res.json(author);
+        } catch (error) {
+            res.status(500).json({
+                message: 'Internal Server Error',
+                error,
+            })
+        }
     },
 
     async show(req, res) {
-        const { author_id } = req.params;
-        const author = await Author.findByPk(author_id);
+        try {
+            const { author_id } = req.params;
+            const author = await Author.findByPk(author_id);
 
-        if (!author) {
-            return res.status(400).json({ message: 'Author not found' });
+            if (!author) {
+                return res.status(400).json({ message: 'Author not found' });
+            }
+
+            res.json(author);
+        } catch (error) {
+            res.status(500).json({
+                message: 'Internal Server Error',
+                error,
+            })
         }
-
-        res.json(author);
     },
 
     async store(req, res) {
-        const { name } = req.body;
-        const author = await Author.create({ name });
-        return res.json(author);
+        try {
+            const { name } = req.body;
+            const author = await Author.create({ name });
+            return res.json(author);
+        } catch (error) {
+            res.status(500).json({
+                message: 'Internal Server Error',
+                error,
+            })
+        }
     },
 
     async update(req, res) {
-        const { author_id } = req.params;
-        const { name } = req.body;
-        const author = await Author.findByPk(author_id);
+        try {
+            const { author_id } = req.params;
+            const { name } = req.body;
+            const author = await Author.findByPk(author_id);
 
-        if (!name) {
-            return res.status(400).json({ message: 'Invalid name' });
-        }
-        if (!author) {
-            return res.status(400).json({ message: 'Author not found' });
-        }
-
-        await Author.update({ name }, {
-            where: {
-                id: author_id
+            if (!name) {
+                return res.status(400).json({ message: 'Invalid name' });
             }
-        });
+            if (!author) {
+                return res.status(400).json({ message: 'Author not found' });
+            }
 
-        res.send();
+            await Author.update({ name }, {
+                where: {
+                    id: author_id
+                }
+            });
+
+            res.send();
+        } catch (error) {
+            res.status(500).json({
+                message: 'Internal Server Error',
+                error,
+            })
+        }
     },
 
     async destroy(req, res) {
-        const { author_id } = req.params;
-        await Author.destroy({
-            where: {
-                id: author_id,
-            }
-        });
+        try {
+            const { author_id } = req.params;
+            await Author.destroy({
+                where: {
+                    id: author_id,
+                }
+            });
 
-        return res.send();
+            return res.send();
+        } catch (error) {
+            res.status(500).json({
+                message: 'Internal Server Error',
+                error,
+            })
+        }
     },
 }
