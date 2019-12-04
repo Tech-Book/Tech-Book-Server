@@ -6,13 +6,14 @@ class Genrer extends Model {
             name: DataTypes.STRING,
         }, {
             sequelize: conn,
+            tableName: 'genres',
         });
     }
 
     static associate(models) {
         this.hasMany(models.Book, {
-            foreignKey: 'gender_id',
-            as: 'gender',
+            foreignKey: 'genrer_id',
+            as: 'genrer',
         });
     }
 }

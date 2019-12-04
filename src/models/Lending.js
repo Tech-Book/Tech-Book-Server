@@ -9,6 +9,7 @@ class Lending extends Model {
             delivered_date: DataTypes.DATE,
         }, {
             sequelize: connection,
+            tableName: 'lendings',
         });
     }
 
