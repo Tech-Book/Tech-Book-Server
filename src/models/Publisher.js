@@ -6,6 +6,7 @@ class Publisher extends Model {
             name: DataTypes.STRING,
         }, {
             sequelize: conn,
+            tableName: 'publishers',
         });
     }
 

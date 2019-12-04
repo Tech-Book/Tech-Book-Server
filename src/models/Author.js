@@ -6,6 +6,7 @@ class Author extends Model {
             name: DataTypes.STRING,
         }, {
             sequelize: conn,
+            tableName: 'authors',
         });
     }
 

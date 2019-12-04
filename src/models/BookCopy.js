@@ -5,6 +5,7 @@ class BookCopy extends Model {
     static init(connection) {
         super.init({}, {
             sequelize: connection,
+            tableName: 'copies',
         });
     }
 

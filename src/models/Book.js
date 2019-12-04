@@ -7,21 +7,22 @@ class Book extends Model {
             release_date: DataTypes.DATE,
         }, {
             sequelize: conn,
+            tableName: 'books',
         });
     }
 
     static associate(models) {
         this.hasMany(models.BookCopy, {
             foreignKey: 'book_id',
-            as: 'copies',
+            as: 'copie',
         });
         this.belongsTo(models.Author, {
             foreignKey: 'author_id',
             as: 'author',
         });
         this.belongsTo(models.Genrer, {
-            foreignKey: 'gender_id',
-            as: 'gender',
+            foreignKey: 'genre_id',
+            as: 'genre',
         });
         this.belongsTo(models.Publisher, {
             foreignKey: 'publisher_id',

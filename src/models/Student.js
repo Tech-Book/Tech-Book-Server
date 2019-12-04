@@ -11,6 +11,7 @@ class Student extends Model {
 
         }, {
             sequelize: connection,
+            tableName: 'students',
         });
     }
 
