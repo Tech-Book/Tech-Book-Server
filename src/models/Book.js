@@ -14,7 +14,7 @@ class Book extends Model {
     static associate(models) {
         this.hasMany(models.BookCopy, {
             foreignKey: 'book_id',
-            as: 'copie',
+            as: 'copies',
         });
         this.belongsTo(models.Author, {
             foreignKey: 'author_id',

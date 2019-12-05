@@ -9,7 +9,7 @@ module.exports = {
             res.status(500).json({
                 message: 'Internal Server Error',
                 error,
-            })
+            });
         }
     },
 
@@ -27,7 +27,7 @@ module.exports = {
             res.status(500).json({
                 message: 'Internal Server Error',
                 error,
-            })
+            });
         }
     },
 
@@ -40,7 +40,7 @@ module.exports = {
             res.status(500).json({
                 message: 'Internal Server Error',
                 error,
-            })
+            });
         }
     },
 
@@ -68,7 +68,7 @@ module.exports = {
             res.status(500).json({
                 message: 'Internal Server Error',
                 error,
-            })
+            });
         }
     },
 
@@ -86,7 +86,7 @@ module.exports = {
             res.status(500).json({
                 message: 'Internal Server Error',
                 error,
-            })
+            });
         }
     },
 }
