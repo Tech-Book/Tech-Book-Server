@@ -5,9 +5,26 @@ module.exports = {
     async index(req, res) {
         try {
             const copies = await Copy.findAll({
-                attributes: ['id', 'createdAt', 'updatedAt'],
+                attributes: ['id'],
                 include:
-                    { association: 'book' },
+                {
+                    association: 'book',
+                    attributes: ['id', 'title', 'release_date'],
+                    include: [
+                        {
+                            attributes: ['id', 'name'],
+                            association: 'publisher'
+                        },
+                        {
+                            attributes: ['id', 'name'],
+                            association: 'genre'
+                        },
+                        {
+                            attributes: ['id', 'name'],
+                            association: 'author'
+                        },
+                    ]
+                },
             });
             res.json(copies);
         } catch (error) {
@@ -24,7 +41,28 @@ module.exports = {
             if (!copy_id) {
                 return res.status(400).json({ message: 'Invalid copy id' });
             }
-            const copy = await Copy.findByPk(copy_id);
+            const copy = await Copy.findByPk(copy_id, {
+                attributes: ['id'],
+                include:
+                {
+                    association: 'book',
+                    attributes: ['id', 'title', 'release_date'],
+                    include: [
+                        {
+                            attributes: ['id', 'name'],
+                            association: 'publisher'
+                        },
+                        {
+                            attributes: ['id', 'name'],
+                            association: 'genre'
+                        },
+                        {
+                            attributes: ['id', 'name'],
+                            association: 'author'
+                        },
+                    ]
+                },
+            });
             if (!copy) {
                 return res.json({ message: 'Copy not found' });
             }
