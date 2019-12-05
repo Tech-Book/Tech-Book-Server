@@ -14,7 +14,7 @@ class BookCopy extends Model {
             foreignKey: 'book_id',
             as: 'book',
         });
-        this.hasMany(models.Lending, {
+        this.hasMany(models.Rent, {
             foreignKey: 'copy_id',
             as: 'copy',
         });

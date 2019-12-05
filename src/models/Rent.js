@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 
-class Lending extends Model {
+class Rent extends Model {
 
     static init(connection) {
         super.init({
@@ -9,7 +9,7 @@ class Lending extends Model {
             delivered_date: DataTypes.DATE,
         }, {
             sequelize: connection,
-            tableName: 'lendings',
+            tableName: 'rents',
         });
     }
 
@@ -25,4 +25,4 @@ class Lending extends Model {
     }
 }
 
-module.exports = Lending;
+module.exports = Rent;
