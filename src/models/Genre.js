@@ -12,8 +12,8 @@ class Genrer extends Model {
 
     static associate(models) {
         this.hasMany(models.Book, {
-            foreignKey: 'genrer_id',
-            as: 'genrer',
+            foreignKey: 'genre_id',
+            as: 'genre',
         });
     }
 }

@@ -10,7 +10,7 @@ module.exports = {
       allowNull: false,
     },
     
-    genrer_id: {
+    genre_id: {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {
