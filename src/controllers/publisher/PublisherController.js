@@ -48,14 +48,6 @@ module.exports = {
         try {
             const { publisher_id } = req.params;
             const { name } = req.body;
-            const publisher = await Publisher.findByPk(publisher_id);
-
-            if (!name) {
-                return res.status(400).json({ message: 'Invalid name' });
-            }
-            if (!publisher) {
-                return res.status(400).json({ message: 'Publisher not found' });
-            }
 
             await Publisher.update({ name }, {
                 where: {

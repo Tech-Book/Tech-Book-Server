@@ -38,9 +38,6 @@ module.exports = {
     async show(req, res) {
         try {
             const { copy_id } = req.params;
-            if (!copy_id) {
-                return res.status(400).json({ message: 'Invalid copy id' });
-            }
             const copy = await Copy.findByPk(copy_id, {
                 attributes: ['id'],
                 include:
@@ -79,7 +76,6 @@ module.exports = {
         try {
             const { book_id } = req.body;
             const book = await Book.findByPk(book_id);
-            console.log(book)
             if (!book) {
                 return res.status(400).json({ message: 'Invalid book id' });
             }
@@ -96,9 +92,6 @@ module.exports = {
     async destroy(req, res) {
         try {
             const { copy_id } = req.params;
-            if (!copy_id) {
-                return res.status(400).json({ message: 'Invalid copy id' });
-            }
             await Copy.destroy({
                 where: {
                     id: copy_id,
