@@ -1,8 +1,8 @@
 const express = require('express');
 const validate = require('express-validation');
-const handle = require('express-async-handler')
+const handle = require('express-async-handler');
 const AuthorController = require('./AuthorController');
-const AuthorValidator = require('../../validators/Author/AuthorValidator');
+const AuthorValidator = require('../../validators/author/AuthorValidator');
 
 const routes = express.Router();
 

@@ -2,7 +2,7 @@ const express = require('express');
 const validate = require('express-validation');
 const handle = require('express-async-handler');
 const GenreController = require('./GenreController');
-const GenreValidator = require('../../validators/Genre/GenreValidator');
+const GenreValidator = require('../../validators/genre/GenreValidator');
 
 const routes = express.Router();
 
