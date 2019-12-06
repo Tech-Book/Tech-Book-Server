@@ -16,7 +16,7 @@ class Student extends Model {
     }
 
     static associate(models) {
-        this.hasMany(models.Lending, {
+        this.hasMany(models.Rent, {
             foreignKey: 'student_id',
             as: 'student',
         });
