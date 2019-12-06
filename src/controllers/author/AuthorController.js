@@ -48,15 +48,6 @@ module.exports = {
         try {
             const { author_id } = req.params;
             const { name } = req.body;
-            const author = await Author.findByPk(author_id);
-
-            if (!name) {
-                return res.status(400).json({ message: 'Invalid name' });
-            }
-            if (!author) {
-                return res.status(400).json({ message: 'Author not found' });
-            }
-
             await Author.update({ name }, {
                 where: {
                     id: author_id
