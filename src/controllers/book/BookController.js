@@ -8,11 +8,20 @@ module.exports = {
         try {
             const books = await Book.findAll(
                 {
-                    attributes: ['title', 'createdAt', 'updatedAt', 'release_date', 'id'],
+                    attributes: ['title', 'release_date', 'id'],
                     include: [
-                        { association: 'publisher' },
-                        { association: 'genre' },
-                        { association: 'author' },
+                        {   
+                            attributes: ['id','name'],
+                            association: 'publisher' 
+                        },
+                        { 
+                            attributes: ['id','name'],
+                            association: 'genre' 
+                        },
+                        { 
+                            attributes: ['id','name'],
+                            association: 'author' 
+                        },
                     ]
                 }
             );
@@ -34,11 +43,20 @@ module.exports = {
             }
             const book = await Book.findByPk(book_id,
                 {
-                    attributes: ['title', 'createdAt', 'updatedAt', 'release_date', 'id'],
+                    attributes: ['title', 'release_date', 'id'],
                     include: [
-                        { association: 'publisher' },
-                        { association: 'genre' },
-                        { association: 'author' },
+                        {   
+                            attributes: ['id','name'],
+                            association: 'publisher' 
+                        },
+                        { 
+                            attributes: ['id','name'],
+                            association: 'genre' 
+                        },
+                        { 
+                            attributes: ['id','name'],
+                            association: 'author' 
+                        },
                     ]
                 }
             );
@@ -57,12 +75,7 @@ module.exports = {
     async store(req, res) {
         try {
             const { author_id, genre_id, publisher_id, release_date, title } = req.body;
-            if (!title) {
-                return res.status(400).json({ message: 'Invalid title' })
-            }
-            if (!release_date) {
-                return res.status(400).json({ message: 'Invalid release date' })
-            }
+            
             const author = await Author.findByPk(author_id);
             if (!author) {
                 return res.status(400).json({ message: 'Invalid Author' });
@@ -89,9 +102,6 @@ module.exports = {
         try {
             const { book_id } = req.params;
             const { author_id, genre_id, publisher_id, release_date, title } = req.body;
-            if (!book_id) {
-                res.status(400).json({ message: 'Invalid Book id' });
-            }
             await Book.update({ author_id, genre_id, publisher_id, release_date, title }, {
                 where: {
                     id: book_id,
@@ -109,9 +119,6 @@ module.exports = {
     async destroy(req, res) {
         try {
             const { book_id } = req.params;
-            if (!book_id) {
-                res.status(400).json({ message: 'Invalid Book id' });
-            }
             await Book.destroy({
                 where: {
                     id: book_id,
