@@ -34,7 +34,7 @@ module.exports = {
 
       devolution_date: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
       },
 
       limit_date: {
@@ -42,8 +42,13 @@ module.exports = {
         allowNull: false,
       },
 
-      delivered_date: {
+      withdrawn_date: {
         type: Sequelize.DATE,
+        allowNull: false,
+      },
+
+      price: {
+        type: Sequelize.DOUBLE,
         allowNull: false,
       },
 

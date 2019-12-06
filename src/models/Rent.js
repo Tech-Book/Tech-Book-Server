@@ -4,9 +4,10 @@ class Rent extends Model {
 
     static init(connection) {
         super.init({
+            price: DataTypes.DOUBLE,
             devolution_date: DataTypes.DATE,
             limit_date: DataTypes.DATE,
-            delivered_date: DataTypes.DATE,
+            withdrawn_date: DataTypes.DATE,
         }, {
             sequelize: connection,
             tableName: 'rents',
