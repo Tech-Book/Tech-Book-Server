@@ -1,105 +1,46 @@
-const Book = require('../../models/Book');
-const Author = require('../../models/Author');
-const Genre = require('../../models/Genre');
-const Publisher = require('../../models/Publisher');
+const Book = require('../models/Book');
 
-module.exports = {
-  async index(req, res) {
-    const books = await Book.findAll({
-      attributes: ['title', 'release_date', 'id'],
-      include: [
-        {
-          attributes: ['id', 'name'],
-          association: 'publisher'
-        },
-        {
-          attributes: ['id', 'name'],
-          association: 'genre'
-        },
-        {
-          attributes: ['id', 'name'],
-          association: 'author'
-        }
-      ]
-    });
-    return res.json(books);
-  },
+class BookController {
+  async index(ctx, next) {
+    const books = await Book.findAll();
+    ctx.response.body = books;
+    await next();
+  }
 
-  async show(req, res) {
-    const { book_id } = req.params;
-    if (!book_id) {
-      res.status(400).json({ message: 'Invalid Book id' });
-    }
-    const book = await Book.findByPk(book_id, {
-      attributes: ['title', 'release_date', 'id'],
-      include: [
-        {
-          attributes: ['id', 'name'],
-          association: 'publisher'
-        },
-        {
-          attributes: ['id', 'name'],
-          association: 'genre'
-        },
-        {
-          attributes: ['id', 'name'],
-          association: 'author'
-        }
-      ]
-    });
-    if (!book) {
-      return res.status(400).json({ message: 'Book not found' });
-    }
-    res.json(book);
-  },
+  async show(ctx, next) {
+    const { bookId } = ctx.params;
+    const book = await Book.findByPk(bookId);
+    ctx.response.body = book;
+    await next();
+  }
 
-  async store(req, res) {
-    const { author_id, genre_id, publisher_id, release_date, title } = req.body;
+  async store(ctx, next) {
+    const { title, releaseDate } = ctx.request.body;
+    const book = await Book.create({ title, releaseDate });
+    ctx.status = 201;
+    ctx.response.body = book;
+    await next();
+  }
 
-    const author = await Author.findByPk(author_id);
-    if (!author) {
-      return res.status(400).json({ message: 'Invalid Author' });
-    }
-    const publisher = await Publisher.findByPk(publisher_id);
-    if (!publisher) {
-      return res.status(400).json({ message: 'Invalid Publisher' });
-    }
-    const genre = await Genre.findByPk(genre_id);
-    if (!genre) {
-      return res.status(400).json({ message: 'Invalid Genre' });
-    }
-    const book = await Book.create({
-      author_id,
-      genre_id,
-      publisher_id,
-      release_date,
-      title
-    });
-    res.json(book);
-  },
+  async update(ctx, next) {
+    const { bookId } = ctx.params;
+    const { title, releaseDate } = ctx.request.body;
+    const book = await Book.findByPk(bookId);
+    await book.update({ title, releaseDate });
+    ctx.response.body = book;
+    await next();
+  }
 
-  async update(req, res) {
-    const { book_id } = req.params;
-    const { author_id, genre_id, publisher_id, release_date, title } = req.body;
-    await Book.update(
-      { author_id, genre_id, publisher_id, release_date, title },
-      {
-        where: {
-          id: book_id
-        }
-      }
-    );
-    return res.send();
-  },
-
-  async destroy(req, res) {
-    const { book_id } = req.params;
+  async destroy(ctx, next) {
+    const { bookId } = ctx.params;
     await Book.destroy({
       where: {
-        id: book_id
+        id: bookId
       }
     });
-
-    return res.send();
+    ctx.status = 204;
+    await next();
   }
-};
+}
+
+module.exports = new BookController();

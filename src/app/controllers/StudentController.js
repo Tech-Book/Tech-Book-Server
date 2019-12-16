@@ -8,7 +8,7 @@ class StudentController {
   }
 
   async show(ctx, next) {
-    const { studentId } = req.params;
+    const { studentId } = ctx.params;
     const student = await Student.findByPk(studentId);
     ctx.response.body = student;
     await next();
@@ -17,33 +17,28 @@ class StudentController {
   async store(ctx, next) {
     const { login, password, name, phone } = ctx.request.body;
     const student = await Student.create({ login, password, name, phone });
+    ctx.status = 201;
     ctx.response.body = student;
     await next();
   }
 
   async update(ctx, next) {
-    const { studentId } = req.params;
-    const { login, password, name, phone } = req.body;
-    const student = await Student.update(
-      { login, password, name, phone },
-      {
-        where: {
-          id: studentId
-        }
-      }
-    );
+    const { studentId } = ctx.params;
+    const student = await Student.findByPk(studentId);
+    const { login, password, name, phone } = ctx.request.body;
+    await student.update({ login, password, name, phone });
     ctx.response.body = student;
     await next();
   }
 
   async destroy(ctx, next) {
-    const { studentId } = req.params;
+    const { studentId } = ctx.params;
     await Student.destroy({
       where: {
         id: studentId
       }
     });
-    ctx.response.body = {};
+    ctx.status = 204;
     await next();
   }
 }

@@ -1,47 +1,46 @@
-const Publisher = require('../../models/Publisher');
+const Publisher = require('../models/Publisher');
 
-module.exports = {
-  async index(req, res) {
+class PublisherController {
+  async index(ctx, next) {
     const publisher = await Publisher.findAll();
-    res.json(publisher);
-  },
+    ctx.response.body = publisher;
+    await next();
+  }
 
-  async show(req, res) {
-    const { publisher_id } = req.params;
-    const publisher = await Publisher.findByPk(publisher_id);
-    if (!publisher) {
-      return res.status(400).json({ message: 'Publisher not found' });
-    }
-    res.json(publisher);
-  },
+  async show(ctx, next) {
+    const { publisherId } = ctx.params;
+    const publisher = await Publisher.findByPk(publisherId);
+    ctx.response.body = publisher;
+    await next();
+  }
 
-  async store(req, res) {
-    const { name } = req.body;
+  async store(ctx, next) {
+    const { name } = ctx.request.body;
     const publisher = await Publisher.create({ name });
-    return res.json(publisher);
-  },
+    ctx.status = 201;
+    ctx.response.body = publisher;
+    await next();
+  }
 
-  async update(req, res) {
-    const { publisher_id } = req.params;
-    const { name } = req.body;
-    await Publisher.update(
-      { name },
-      {
-        where: {
-          id: publisher_id
-        }
-      }
-    );
-    res.send();
-  },
+  async update(ctx, next) {
+    const { publisherId } = ctx.params;
+    const { name } = ctx.body;
+    const publisher = await Publisher.findByPk(publisherId);
+    await publisher.update({ name });
+    ctx.response.body = publisher;
+    await next();
+  }
 
-  async destroy(req, res) {
-    const { publisher_id } = req.params;
+  async destroy(ctx, next) {
+    const { publisherId } = ctx.params;
     await Publisher.destroy({
       where: {
-        id: publisher_id
+        id: publisherId
       }
     });
-    return res.send();
+    ctx.status = 204;
+    await next();
   }
-};
+}
+
+module.exports = new PublisherController();

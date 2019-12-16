@@ -1,49 +1,46 @@
-const Author = require('../../models/Author');
+const Author = require('../models/Author');
 
-module.exports = {
+class AuthorController {
   async index(ctx, next) {
     const author = await Author.findAll();
     ctx.response.body = author;
     await next();
-  },
+  }
 
   async show(ctx, next) {
-    const { authorId } = req.params;
+    const { authorId } = ctx.params;
     const author = await Author.findByPk(authorId);
     ctx.response.body = author;
     await next();
-  },
+  }
 
   async store(ctx, next) {
-    const { name } = req.body;
+    const { name } = ctx.request.body;
     const author = await Author.create({ name });
+    ctx.status = 201;
     ctx.response.body = author;
-    await next();
-  },
-
-  async update(ctx, next) {
-    const { authorId } = req.params;
-    const { name } = req.body;
-    const author = await Author.update(
-      { name },
-      {
-        where: {
-          id: authorId
-        }
-      }
-    );
-    ctx.response.body = author;
-    await next();
-  },
-
-  async destroy(req, res) {
-    const { author_id } = req.params;
-    await Author.destroy({
-      where: {
-        id: author_id
-      }
-    });
-    ctx.response.body = {};
     await next();
   }
-};
+
+  async update(ctx, next) {
+    const { authorId } = ctx.params;
+    const { name } = ctx.request.body;
+    const author = await Author.findByPk(authorId);
+    await author.update({ name });
+    ctx.response.body = author;
+    await next();
+  }
+
+  async destroy(ctx, next) {
+    const { authorId } = ctx.params;
+    await Author.destroy({
+      where: {
+        id: authorId
+      }
+    });
+    ctx.status = 204;
+    await next();
+  }
+}
+
+module.exports = new AuthorController();

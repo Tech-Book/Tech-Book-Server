@@ -1,47 +1,46 @@
-const Genre = require('../../models/Genre');
+const Genre = require('../models/Genre');
 
-module.exports = {
-  async index(req, res) {
-    const genre = await Genre.findAll();
-    res.json(genre);
-  },
+class GenreController {
+  async index(ctx, next) {
+    const genres = await Genre.findAll();
+    ctx.response.body = genres;
+    await next();
+  }
 
-  async show(req, res) {
-    const { genre_id } = req.params;
-    const genre = await Genre.findByPk(genre_id);
-    if (!genre) {
-      return res.status(400).json({ message: 'Genre not found' });
-    }
-    res.json(genre);
-  },
+  async show(ctx, next) {
+    const { genreId } = ctx.params;
+    const genre = await Genre.findByPk(genreId);
+    ctx.response.body = genre;
+    await next();
+  }
 
-  async store(req, res) {
-    const { name } = req.body;
+  async store(ctx, next) {
+    const { name } = ctx.request.body;
     const genre = await Genre.create({ name });
-    return res.json(genre);
-  },
+    ctx.status = 201;
+    ctx.response.body = genre;
+    await next();
+  }
 
-  async update(req, res) {
-    const { genre_id } = req.params;
-    const { name } = req.body;
-    await Genre.update(
-      { name },
-      {
-        where: {
-          id: genre_id
-        }
-      }
-    );
-    res.send();
-  },
+  async update(ctx, next) {
+    const { genreId } = ctx.params;
+    const { name } = ctx.request.body;
+    const genre = await Genre.findByPk(genreId);
+    await genre.update({ name });
+    ctx.response.body = genre;
+    await next();
+  }
 
-  async destroy(req, res) {
-    const { genre_id } = req.params;
+  async destroy(ctx, next) {
+    const { genreId } = ctx.params;
     await Genre.destroy({
       where: {
-        id: genre_id
+        id: genreId
       }
     });
-    return res.send();
+    ctx.status = 204;
+    await next();
   }
-};
+}
+
+module.exports = new GenreController();
