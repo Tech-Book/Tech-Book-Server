@@ -1,27 +1,28 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, Sequelize } = require('sequelize');
 
 class Rent extends Model {
-
-  static init(connection) {
-    super.init({
-      price: DataTypes.DOUBLE,
-      devolution_date: DataTypes.DATE,
-      limit_date: DataTypes.DATE,
-      withdrawn_date: DataTypes.DATE,
-    }, {
-      sequelize: connection,
-      tableName: 'rents',
-    });
+  static init(sequelize) {
+    super.init(
+      {
+        price: Sequelize.DOUBLE,
+        devolutionDate: Sequelize.DATE,
+        limitDate: Sequelize.DATE,
+        withdrawnDate: Sequelize.DATE
+      },
+      {
+        sequelize
+      }
+    );
   }
 
   static associate(models) {
     this.belongsTo(models.Student, {
-      foreignKey: 'student_id',
-      as: 'student',
+      foreignKey: ['student_id', 'studentId'],
+      as: 'student'
     });
-    this.belongsTo(models.BookCopy, {
-      foreignKey: 'copy_id',
-      as: 'copy',
+    this.belongsTo(models.Copy, {
+      foreignKey: ['copy_id', 'copyId'],
+      as: 'copy'
     });
   }
 }

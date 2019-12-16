@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('students', {
@@ -7,42 +5,36 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: false,
+        allowNull: false
       },
-
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
-
       login: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
-
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
-
       phone: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
-
       created_at: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
       },
-
       updated_at: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
       }
-    })
+    });
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: queryInterface => {
     return queryInterface.dropTable('students');
   }
 };

@@ -1,20 +1,15 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, Sequelize } = require('sequelize');
 
 class Genrer extends Model {
-  static init(conn) {
-    super.init({
-      name: DataTypes.STRING,
-    }, {
-      sequelize: conn,
-      tableName: 'genres',
-    });
-  }
-
-  static associate(models) {
-    this.hasMany(models.Book, {
-      foreignKey: 'genre_id',
-      as: 'genre',
-    });
+  static init(sequelize) {
+    super.init(
+      {
+        name: Sequelize.STRING
+      },
+      {
+        sequelize
+      }
+    );
   }
 }
 

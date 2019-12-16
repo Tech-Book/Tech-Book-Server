@@ -1,21 +1,15 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, Sequelize } = require('sequelize');
 
 class Author extends Model {
-  static init(conn) {
-    super.init({
-      name: DataTypes.STRING,
-    }, {
-      sequelize: conn,
-      tableName: 'authors',
-    });
-  }
-
-  static associate(models) {
-
-    this.hasMany(models.Book, {
-      foreignKey: 'author_id',
-      as: 'author',
-    });
+  static init(sequelize) {
+    super.init(
+      {
+        name: Sequelize.STRING
+      },
+      {
+        sequelize
+      }
+    );
   }
 }
 
