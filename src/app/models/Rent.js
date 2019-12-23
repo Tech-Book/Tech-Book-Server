@@ -17,8 +17,8 @@ class Rent extends Model {
 
   static associate(models) {
     this.belongsTo(models.Student, {
-      foreignKey: ['student_id', 'studentId'],
-      as: 'student'
+      foreignKey: ['customer_id', 'customerId'],
+      as: 'customer'
     });
     this.belongsTo(models.Copy, {
       foreignKey: ['copy_id', 'copyId'],

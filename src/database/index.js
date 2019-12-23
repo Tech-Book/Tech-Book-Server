@@ -6,10 +6,12 @@ const Genre = require('../app/models/Genre');
 const Publisher = require('../app/models/Publisher');
 const Copy = require('../app/models/Copy');
 const Rent = require('../app/models/Rent');
-const Student = require('../app/models/Student');
+const User = require('../app/models/User');
+const Customer = require('../app/models/Customer');
+const Admin = require('../app/models/Admin');
 const databaseConfig = require('../config/database');
 
-const models = [Author, Book, Genre, Publisher, Copy, Rent, Student];
+const models = [Author, Book, Genre, Publisher, Copy, Rent, User, Customer, Admin];
 
 class Database {
   constructor() {
