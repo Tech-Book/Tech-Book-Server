@@ -1,6 +1,5 @@
 <h1 align="center">Tech Book Server</h1>
 
-<p align="center">Very Useful Tools to Remember 🦇</p>
 
 <p align="center">
   <a href="http://makeapullrequest.com">
