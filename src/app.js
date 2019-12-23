@@ -28,7 +28,7 @@ class App {
         await next();
       } catch (err) {
         ctx.status = err.status || 500;
-        ctx.body = err.message;
+        ctx.body = err
         ctx.app.emit('error', err, ctx);
       }
     });

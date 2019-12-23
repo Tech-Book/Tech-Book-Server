@@ -14,7 +14,7 @@ class Admin extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Student, {
+    this.belongsTo(models.User, {
       foreignKey: ['user_id', 'userId'],
       as: 'user'
     });
