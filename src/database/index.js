@@ -1,30 +1,36 @@
 const Sequelize = require('sequelize');
-const config = require('../config/database');
-const Author = require('../models/Author');
-const Book = require('../models/Book');
-const Genre = require('../models/Genre');
-const Publisher = require('../models/Publisher');
-const BookCopy = require('../models/BookCopy');
-const Rent = require('../models/Rent');
-const Student = require('../models/Student');
 
-const connection = new Sequelize(config);
-const { models } = connection;
+const Author = require('../app/models/Author');
+const Book = require('../app/models/Book');
+const Genre = require('../app/models/Genre');
+const Publisher = require('../app/models/Publisher');
+const Copy = require('../app/models/Copy');
+const Rent = require('../app/models/Rent');
+const User = require('../app/models/User');
+const Customer = require('../app/models/Customer');
+const Admin = require('../app/models/Admin');
+const databaseConfig = require('../config/database');
 
-Author.init(connection);
-Genre.init(connection);
-Publisher.init(connection);
-Book.init(connection);
-BookCopy.init(connection);
-Rent.init(connection);
-Student.init(connection);
+const models = [Author, Book, Genre, Publisher, Copy, Rent, User, Customer, Admin];
 
-Author.associate(models);
-Genre.associate(models);
-Student.associate(models);
-Publisher.associate(models);
-Book.associate(models);
-BookCopy.associate(models);
-Rent.associate(models);
+class Database {
+  constructor() {
+    this.init();
+    this.associate();
+  }
 
-module.exports = connection;
+  init() {
+    this.connection = new Sequelize(databaseConfig);
+    models.map(model => model.init(this.connection));
+  }
+
+  associate() {
+    models.forEach(model => {
+      if (model.associate) {
+        model.associate(this.connection.models);
+      }
+    });
+  }
+}
+
+module.exports = new Database();

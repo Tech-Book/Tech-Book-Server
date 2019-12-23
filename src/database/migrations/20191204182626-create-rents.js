@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('rents', {
@@ -7,64 +5,56 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: false,
+        allowNull: false
       },
-
       copy_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'copies',
-          key: 'id',
+          key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onDelete: 'CASCADE'
       },
-
-      student_id: {
+      user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'students',
-          key: 'id',
+          model: 'users',
+          key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onDelete: 'CASCADE'
       },
-
       devolution_date: {
         type: Sequelize.DATE,
-        allowNull: true,
+        allowNull: true
       },
-
       limit_date: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
       },
-
       withdrawn_date: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
       },
-
       price: {
         type: Sequelize.DOUBLE,
-        allowNull: false,
+        allowNull: false
       },
-
       created_at: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
       },
-
       updated_at: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
       }
     });
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: queryInterface => {
     return queryInterface.dropTable('rents');
   }
 };

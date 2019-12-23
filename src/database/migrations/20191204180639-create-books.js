@@ -1,71 +1,62 @@
-'use strict';
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
-   return queryInterface.createTable('books',{
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false,
-    },
-    
-    genre_id: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'genres',
-        key: 'id',
+    return queryInterface.createTable('books', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
       },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
-    },
-
-    author_id: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'authors',
-        key: 'id',
+      genre_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'genres',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
-    },
-
-    publisher_id: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'publishers',
-        key: 'id',
+      author_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'authors',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
-    },
-
-    title: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-
-    release_date: {
-      type: Sequelize.DATE,
-      allowNull: false,
-    },
-
-    created_at: {
-      type: Sequelize.DATE,
-      allowNull: false,
-    },
-
-    updated_at: {
-      type: Sequelize.DATE,
-      allowNull: false,
-    }
-   })
+      publisher_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'publishers',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      },
+      title: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      release_date: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false
+      }
+    });
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: queryInterface => {
     return queryInterface.dropTable('books');
   }
 };
