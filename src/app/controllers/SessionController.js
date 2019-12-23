@@ -18,7 +18,7 @@ class SessionController {
     }
 
     ctx.response.body = {
-      token: User.generateToken(user.id, false)
+      token: user.generateToken(user.id, false)
     }
 
     await next();

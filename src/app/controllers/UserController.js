@@ -1,6 +1,7 @@
 const User = require('../models/User');
 
-class UsertController {
+class UserController {
+
   async index(ctx, next) {
     const users = await User.findAll();
     ctx.response.body = users;
@@ -43,4 +44,4 @@ class UsertController {
   }
 }
 
-module.exports = new UsertController();
+module.exports = new UserController();
